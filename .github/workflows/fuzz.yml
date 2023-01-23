@@ -1,0 +1,21 @@
+name: Bruh
+
+on:
+  pull_request_target:
+    types: [labeled, synchronize]
+  push:
+    paths:
+      - "**.zig"
+    branches:
+      - master
+
+permissions: read-all
+
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Swap Space
+        run: |
+          echo ${{ github.event.pull_request.head.repo.full_name || github.repository }}/${{ github.head_ref || github.ref_name }}/${{ github.event.pull_request.head.sha || github.sha }}
